@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
@@ -22,6 +23,12 @@ class CustomLoginView(LoginView):
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['count'] = context['tasks'].filter(is_done=False).count()
+        return context
 
 
 class TaskDetails(LoginRequiredMixin, DetailView):
