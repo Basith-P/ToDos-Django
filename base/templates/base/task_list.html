@@ -1,6 +1,15 @@
 {% extends './base.html' %} {% block content %}
 <h2>Task List</h2>
 <a href="{% url 'create_task' %}">New Task</a>
+<form method="get">
+  <input
+    type="text"
+    name="search_field"
+    value="{{search_key}}"
+    placeholder="Search tasks"
+  />
+  <input type="submit" value="Submit" />
+</form>
 <table>
   <tr>
     <th>Items</th>
