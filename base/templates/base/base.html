@@ -3,16 +3,192 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600&display=swap"
+      rel="stylesheet"
+    />
     <title>ToDos</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+      }
+
+      html {
+        font-family: "Nunito", sans-serif;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        font-size: 62.5%;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f5f5f5;
+        font-size: 1.6rem;
+      }
+
+      .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-weight: 600;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #0065ff, #6942ef);
+        color: #fff;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      textarea {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        border: 1px solid #eee;
+        font-weight: 400;
+      }
+
+      input[type="submit"] {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        border: none;
+        font-weight: 400;
+        cursor: pointer;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 500px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin: 2rem;
+      }
+
+      header {
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          90deg,
+          rgba(2, 0, 36, 1) 0%,
+          rgba(9, 9, 121, 1) 35%,
+          rgba(0, 212, 255, 1) 100%
+        );
+      }
+
+      header span {
+        color: #fff;
+        font-weight: 600;
+        font-size: 2rem;
+      }
+
+      header .btn {
+        background-color: #fff;
+        color: #000;
+      }
+
+      main {
+        padding: 2rem;
+        width: 100%;
+      }
+
+      .tasks-topbar-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .due-tasks-info {
+        color: #888;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        margin: 1rem 0;
+      }
+
+      #tasks-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .task {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        text-decoration: none;
+        background-color: #fafafa;
+      }
+
+      .task-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        color: #000;
+      }
+
+      .completed-task {
+        text-decoration: line-through;
+        opacity: 0.5;
+      }
+
+      #new-task-btn {
+        color: white;
+        background-color: #333;
+      }
+
+      .task-form {
+        width: 100%;
+        gap: 1rem;
+      }
+
+      .task-form td {
+        gap: 0.5rem;
+        padding: 1rem 0;
+      }
+
+      .action-btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1rem;
+      }
+
+      footer {
+        padding: 0.5rem;
+        background: linear-gradient(
+          90deg,
+          rgba(2, 0, 36, 1) 0%,
+          rgba(9, 9, 121, 1) 35%,
+          rgba(0, 212, 255, 1) 100%
+        );
+      }
+    </style>
   </head>
   <body>
-    {% if request.user.is_authenticated %}
-    <span>{{request.user}}</span>
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    <a href="{% url 'login' %}">Login</a>
-    {% endif %}
-    <hr />
-    {% block content %}{% endblock %}
+    <div class="container">
+      <header>
+        {% if request.user.is_authenticated %}
+        <span>Hello @{{request.user}}</span>
+        <a class="btn" href="{% url 'logout' %}">Logout</a>
+        {% endif %}
+      </header>
+      <main>{% block content %}{% endblock %}</main>
+      <footer></footer>
+    </div>
   </body>
 </html>

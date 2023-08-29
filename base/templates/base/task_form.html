@@ -1,11 +1,13 @@
 {% extends './base.html' %} {% block content %}
 <h2>New Task</h2>
-<form action="" method="POST">
+<form method="POST">
   {% csrf_token %}
-  <table>
+  <table class="task-form">
     {{ form.as_table }}
   </table>
-  <a href="{% url 'tasks_list' %}">Cancel</a>
-  <input type="submit" value="Save" />
+  <div class="action-btns">
+    <a href="{% url 'tasks_list' %}">Cancel</a>
+    <input class="btn btn-primary" type="submit" value="Save" />
+  </div>
 </form>
 {% endblock content %}

@@ -59,9 +59,9 @@ class TaskList(LoginRequiredMixin, ListView):
         return context
 
 
-class TaskDetails(LoginRequiredMixin, DetailView):
-    model = Task
-    context_object_name = 'tasks'
+# class TaskDetails(LoginRequiredMixin, DetailView):
+#     model = Task
+#     context_object_name = 'tasks'
 
 
 class TaskCreate(LoginRequiredMixin, CreateView):
